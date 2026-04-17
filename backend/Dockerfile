@@ -1,6 +1,7 @@
 # Stage 1: Build and Test
-FROM ghcr.io/astral-sh/uv:python3.12-bookworm AS builder
-ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy
+FROM python:3.12-slim-bookworm AS builder
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+ENV UV_COMPILE_BYTECODE=1 UV_LINK_MODE=copy UV_PROJECT_ENVIRONMENT=/app/.venv
 
 WORKDIR /app
 
@@ -25,7 +26,6 @@ WORKDIR /app
 # Copy the environment and application from builder
 COPY --from=builder /app/.venv /app/.venv
 COPY --from=builder /app/app /app/app
-# We could also copy seed.py if we need to run it, but assuming it's in /app/app/seed.py
 COPY --from=builder /app/pyproject.toml /app/pyproject.toml
 
 EXPOSE 8000
