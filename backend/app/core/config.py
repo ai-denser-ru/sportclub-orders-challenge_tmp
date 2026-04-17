@@ -21,6 +21,9 @@ class Settings(BaseSettings):
 
     DATABASE_URL: str = f"sqlite:///{BASE_DIR / 'app.db'}"
 
+    # Opt-in: populate DB with seed data on startup
+    AUTO_SEED_DB: bool = False
+
     # CORS – allow frontend dev server
     CORS_ORIGINS: list[str] = ["http://localhost:5173"]
 
