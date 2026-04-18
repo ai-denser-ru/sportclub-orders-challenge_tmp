@@ -1,6 +1,7 @@
 """Order ORM model."""
 
 import datetime
+from decimal import Decimal
 
 from sqlalchemy import Date, ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -22,7 +23,7 @@ class Order(Base):
         nullable=False,
         default=OrderStatus.PENDING.value,
     )
-    total: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False, default=0)
+    total: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False, default=0)
 
     # Relationships
     customer: Mapped["Customer"] = relationship(  # noqa: F821

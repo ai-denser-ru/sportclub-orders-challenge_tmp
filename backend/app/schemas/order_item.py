@@ -1,5 +1,7 @@
 """Pydantic schemas for the OrderItem entity."""
 
+from decimal import Decimal
+
 from pydantic import BaseModel, ConfigDict
 
 
@@ -8,7 +10,7 @@ class OrderItemBase(BaseModel):
 
     product_name: str
     quantity: int
-    price: float
+    price: Decimal
 
 
 class OrderItemCreate(OrderItemBase):

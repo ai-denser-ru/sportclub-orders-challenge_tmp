@@ -1,5 +1,7 @@
 """OrderItem ORM model."""
 
+from decimal import Decimal
+
 from sqlalchemy import ForeignKey, Numeric, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -15,7 +17,7 @@ class OrderItem(Base):
     order_id: Mapped[int] = mapped_column(ForeignKey("orders.id"), nullable=False)
     product_name: Mapped[str] = mapped_column(String(200), nullable=False)
     quantity: Mapped[int] = mapped_column(nullable=False)
-    price: Mapped[float] = mapped_column(Numeric(10, 2), nullable=False)
+    price: Mapped[Decimal] = mapped_column(Numeric(10, 2), nullable=False)
 
     # Relationships
     order: Mapped["Order"] = relationship(  # noqa: F821

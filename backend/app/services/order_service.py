@@ -67,7 +67,7 @@ class OrderService:
             customer_id=data.customer_id,
             date=data.date,
             status=data.status.value,
-            total=round(total, 2),
+            total=total,
             items=items,
         )
 

@@ -1,6 +1,7 @@
 """Pydantic schemas for the Order entity."""
 
 from datetime import date
+from decimal import Decimal
 
 from pydantic import BaseModel, ConfigDict
 
@@ -32,7 +33,7 @@ class OrderRead(BaseModel):
     customer_id: int
     date: date
     status: OrderStatus
-    total: float
+    total: Decimal
 
 
 class OrderDetail(OrderRead):

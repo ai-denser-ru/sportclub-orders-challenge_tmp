@@ -5,6 +5,7 @@ Run with: uv run python -m app.seed
 
 import random
 from datetime import date, timedelta
+from decimal import Decimal
 
 from app.core.database import Base, SessionLocal, engine
 from app.models.customer import Customer
@@ -107,7 +108,7 @@ def seed() -> None:
             db.flush()
 
             # Create items for this order
-            order_total = 0.0
+            order_total = Decimal("0")
             num_items = items_per_order[i]
             selected_products = random.sample(
                 PRODUCTS, min(num_items, len(PRODUCTS))
@@ -125,7 +126,7 @@ def seed() -> None:
                 order_total += qty * base_price
                 total_items += 1
 
-            order.total = round(order_total, 2)
+            order.total = order_total
             orders.append(order)
 
         db.commit()
